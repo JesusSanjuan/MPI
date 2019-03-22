@@ -23,7 +23,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="MPI.cpp">
+    <ClCompile Include="Contador_P_El.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
