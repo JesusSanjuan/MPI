@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "mpi.h"
 
- //Para compilar ir a la carpeta de MPI --> Debug y ahi abrir CMD y ejecutar con el comando mpiexec MPI.exe
+ //Para compilar ir a la carpeta de MPI --> Debug y ahi abrir CMD y ejecutar con el comando mpiexec MPI.exe, colocar tambien los archivos con los que trabajara en la carpeta , ya sea txt jpg etc
 int main(int argc, char* argv[])
 {
 	int rank, size, len;
