@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "mpi.h"
 
- //Para compilar ir a la carpeta de MPI --> Debug y ahi abrir CMD y ejecutar con el comando mpiexec MPI.exe
+ //Para compilar ir a la carpeta de MPI --> Debug y ahi abrir CMD y ejecutar con el comando mpiexec MPI.exe, colocar tambien los archivos con los que trabajara en la carpeta , ya sea txt jpg etc
 int main(int argc, char* argv[])
 {
 	int rank, size, len;
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-	FILE* archivo = fopen("el_quijote2.txt", "r");
+	FILE* archivo = fopen("el_quijote.txt", "r");
 	char *buffer = NULL;
 	int i = 0, c;
 	c = fgetc(archivo);
