@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "mpi.h"
 
+ //Para compilar ir a la carpeta de MPI --> Debug y ahi abrir CMD y ejecutar con el comando mpiexec MPI.exe
 int main(int argc, char* argv[])
 {
 	int rank, size, len;
