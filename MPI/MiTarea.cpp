@@ -21,7 +21,9 @@ int main(int argc, char* argv[])
 	int i;
 
 	char version[MPI_MAX_LIBRARY_VERSION_STRING];
-
+	MPI_Init(&argc, &argv);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	MPI_Comm_size(MPI_COMM_WORLD, &size);
 
 
 	if (argc < 3) {
@@ -32,7 +34,7 @@ int main(int argc, char* argv[])
 	n = argc - 2;
 	palabras = argv + 2;
 
-	cuentas = malloc(argc * sizeof(int));
+	cuentas = (int *) malloc(argc * sizeof(int));
 	if (cuentas == NULL) {
 		fprintf(stderr, "Memoria insuficiente para ejecutar el programa.\n");
 		exit(EXIT_FAILURE);
@@ -44,9 +46,7 @@ int main(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	MPI_Comm_size(MPI_COMM_WORLD, &size);
+	
 
 	for (i = 0; i < n; i++) {
 		cuentas[i] = 0;
