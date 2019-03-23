@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 
 	
 
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < largo; i++) {
 		cuentas[i] = 0;
 	}
 
@@ -80,15 +80,15 @@ int main(int argc, char* argv[])
 
 	int x = 0;
 	int div = a / size;
-	int Total = 0;
 
 	for (int i = 0; i < size; i++)
 	{
 		if (rank == i)
 		{
+			int tope = div * (i + 1);
 			for (int ii = 0; ii < largo; ii++)
 			{
-				int tope = div * (i + 1);
+				
 				while (x < tope)
 				{
 
@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 		x = x + div;
 	}
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < largo; i++) {
 		printf("%6d\t %c Procesador: %d\n", cuentas[i], palabras[i], rank);
 	}
 
