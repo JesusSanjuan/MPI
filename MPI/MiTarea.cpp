@@ -103,6 +103,7 @@ int main(int argc, char* argv[])
 					x++;
 				}
 			}
+			printf("\n");
 		}
 		x = x + div;
 	}
