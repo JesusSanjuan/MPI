@@ -14,14 +14,11 @@ int main(int argc, char* argv[])
 
 	int rank, size, len;
 	int n;
-	const int largo = 3;
-	char palabras[largo] = {'a','b','c' };
-	char **palabras2;
-	char *buffer = NULL;
+	char **palabras;
 	int *cuentas = 0;
 	FILE *f;
-	//char palabra_actual[MAX_LARGO_PALABRA];
-	int i = 0, a=0, c;
+	char palabra_actual[MAX_LARGO_PALABRA];
+	int i;
 
 	char version[MPI_MAX_LIBRARY_VERSION_STRING];
 	MPI_Init(&argc, &argv);
@@ -35,7 +32,8 @@ int main(int argc, char* argv[])
 	}
 
 	n = argc - 2;
-	palabras2 = argv + 2;
+	palabras = argv + 2;
+
 	cuentas = (int *) malloc(argc * sizeof(int));
 	if (cuentas == NULL) {
 		fprintf(stderr, "Memoria insuficiente para ejecutar el programa.\n");
@@ -43,15 +41,9 @@ int main(int argc, char* argv[])
 	}
 
 	f = fopen(argv[1], "r");
-	
 	if (f == NULL) {
 		fprintf(stderr, "No se pudo abrir el archivo %s\n", argv[1]);
 		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		c = fgetc(f);
-		buffer = (char*)realloc(NULL, sizeof(char));
 	}
 
 	
@@ -61,57 +53,18 @@ int main(int argc, char* argv[])
 	}
 
 	while (!feof(f)) {
-	//	fscanf(f, "%s", palabra_actual);
-		buffer[a] = c;
-		a++;
-		buffer = (char*)realloc(buffer, (a + 1) * sizeof(char));
-		c = fgetc(f);
-	/*	for (i = 0; i < n; i++) {
+		fscanf(f, "%s", palabra_actual);
+		for (i = 0; i < n; i++) {
 			if (strcmp(palabra_actual, palabras[i]) == 0) {
 				cuentas[i]++;
 			}
-		}*/
+		}
+	}
+
+	for (i = 0; i < n; i++) {
+		printf("%6d\t %s Procesador: %d\n", cuentas[i], palabras[i], rank);
 	}
 	fclose(f);
-
-/*	for (i = 0; i < n; i++) {
-		printf("%6d\t %s Procesador: %d\n", cuentas[i], palabras[i], rank);
-	}*/
-
-	int x = 0;
-	int div = a / size;
-	int Total = 0;
-
-	for (int i = 0; i < size; i++)
-	{
-		if (rank == i)
-		{
-			for (int ii = 0; ii < largo; ii++)
-			{
-				int tope = div * (i + 1);
-				while (x < tope)
-				{
-
-				
-						//printf("%c\t %c \n", buffer[x], palabras[ii]);
-						if (buffer[x] == palabras[ii] )
-						//if (strcmp(buffer[x], palabras[largo]) == 0)
-						{
-							cuentas[ii]= cuentas[ii]+1;
-						}
-								
-					x++;
-				}
-			}
-		}
-		x = x + div;
-	}
-
-	for (int i = 0; i < n; i++) {
-		printf("%6d\t %c Procesador: %d\n", cuentas[i], palabras[i], rank);
-	}
-
-	
 	free(cuentas);
 	MPI_Get_library_version(version, &len);
 	MPI_Finalize();
